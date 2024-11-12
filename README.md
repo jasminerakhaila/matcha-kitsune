@@ -5,7 +5,90 @@ Matcha Kitsune is an _e-commerce_ platform where everyone can enjoy shopping wit
 "A great product comes from a great quality."
 -- Matcha Kitsune
 
-## Assignments: Tugas 7
+## Assignments: Tugas 8
+(will be answered in Bahasa Indonesia)
+
+### Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+Dalam pemrograman Flutter, penggunaan kata kunci const memiliki peran penting dalam meningkatkan efisiensi dan kinerja aplikasi. Kata kunci const digunakan untuk mendeklarasikan nilai yang tidak berubah-ubah sepanjang waktu eksekusi program. Ini berarti bahwa variabel atau objek yang dideklarasikan dengan const diinisialisasi saat waktu kompilasi dan nilainya harus sudah diketahui sebelum aplikasi dijalankan.
+
+Penggunaan const membawa beberapa keuntungan, seperti:
+1. Optimisasi Performa: Flutter menggunakan const untuk membuat instansi widget yang efisien. Ketika sebuah widget dideklarasikan sebagai const, Flutter tidak perlu mengalokasikan memori baru setiap kali widget tersebut dibuat. Ini mengurangi overhead karena memori yang sama digunakan ulang setiap kali widget const dipanggil
+2. Pengurangan Jumlah Garbage Collection: Karena objek const bersifat imutabel dan memiliki alokasi memori yang tetap, ini mengurangi beban pada garbage collector. Dengan demikian, aplikasi menjadi lebih responsif dan lancar.
+3. Ketetapan dan Keamanan Kode: Menggunakan const membantu menghindari bugs karena memastikan bahwa nilai tidak akan berubah di tempat lain dalam kode. Ini meningkatkan keandalan dan keamanan kode.
+
+Kapan sebaiknya menggunakan const:
+- Deklarasi Widget yang Tidak Berubah: Gunakan const untuk mendeklarasikan widget atau objek yang tidak memerlukan perubahan setelah diinisialisasi, seperti teks statis, warna, dan padding yang tidak berubah selama aplikasi berjalan.
+- Nilai Konfigurasi: Nilai konfigurasi yang tidak berubah, seperti konstanta numerik, string, atau array yang digunakan secara berulang dalam aplikasi.
+
+Kapan sebaiknya tidak menggunakan const:
+- Deklarasi Objek dengan Nilai Dinamis: Tidak menggunakan const ketika nilai objek atau widget bisa berubah, seperti nilai yang bergantung pada state atau data dari database.
+- Ketika Nilai Tidak Diketahui Saat Kompilasi: Tidak memungkinkan untuk menggunakan const jika nilai objek tidak dapat ditentukan saat kompilasi dan hanya diketahui saat runtime.
+
+
+### Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+Dalam Flutter, Column digunakan untuk mengatur widget secara vertikal (satu di atas yang lain), sedangkan Row digunakan untuk mengatur widget secara horizontal (satu samping yang lain). Keduanya adalah widget layout yang berasal dari kelas Flex dan memungkinkan penyelarasan serta distribusi ruang antar widget anak dengan properti seperti mainAxisAlignment dan crossAxisAlignment.
+
+Contoh Column:
+
+```
+Column(
+  children: <Widget>[
+    Text('First Item'),
+    Text('Second Item'),
+    ElevatedButton(onPressed: () {}, child: Text('Click Me'))
+  ],
+)
+```
+
+Contoh Row:
+```
+Row(
+  children: <Widget>[
+    Icon(Icons.share),
+    Icon(Icons.thumb_up),
+    Icon(Icons.thumb_down),
+  ],
+)
+```
+
+Perbedaan utama terletak pada orientasi widget anak: Column untuk susunan vertikal dan Row untuk susunan horizontal. Penggunaan antara keduanya tergantung pada kebutuhan desain antarmuka pengguna Anda.
+
+
+### Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Dalam kode saya, elemen input yang digunakan pada halaman form adalah TextFormField. Di halaman ProductEntryFormPage, saya memiliki tiga TextFormField untuk memasukkan nama produk, amount, dan deskripsi. Elemen-elemen ini memungkinkan pengguna untuk memasukkan teks dan angka yang kemudian divalidasi dan diproses.
+
+Adapun jenis elemen input lain yang tidak digunakan dalam tugas saya:
+
+- DropdownButton: Untuk memilih dari daftar opsi.
+- Slider: Untuk memilih nilai dalam rentang tertentu melalui geseran.
+- Switch: Untuk mengganti antara dua state (on/off).
+- DatePicker: Untuk memilih tanggal.
+
+Elemen-elemen ini dapat digunakan untuk menambahkan lebih banyak fungsi dan interaktivitas tergantung pada kebutuhan aplikasi yang kamu kembangkan. Misalnya, DropdownButton bisa berguna untuk memilih kategori produk, sedangkan DatePicker bisa digunakan jika membutuhkan input tanggal kadaluwarsa produk.
+
+
+### Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Dalam tugas kali ini, saya mengatur tema di aplikasi Flutter dengan menggunakan ThemeData yang ada di dalam MaterialApp. Caranya adalah dengan menentukan warna utama dan warna sekunder melalui primarySwatch dan colorScheme. Di kode yang saya tulis, saya memilih Colors.green sebagai warna utama dan warna khusus lain sebagai warna pendukung.
+
+Menggunakan ThemeData membantu saya memastikan bahwa semua elemen di aplikasi, seperti AppBar, buttons, dan teks, memiliki tampilan yang konsisten. Sehingga, jika nantinya ada perubahan tema atau warna, saya hanya perlu mengubahnya di satu tempat, dan perubahan itu akan berlaku untuk seluruh aplikasi. Ini memudahkan saya dalam mengembangkan dan memelihara tampilan aplikasi.
+
+
+### Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Dalam mengembangkan aplikasi Flutter yang memiliki banyak halaman, navigasi yang efektif dan terstruktur adalah kunci untuk menciptakan pengalaman pengguna yang baik. Untuk mengelola navigasi, saya menggunakan konsep Navigator yang disediakan oleh Flutter, yang memungkinkan navigasi antar halaman dengan mudah. Navigator bekerja seperti stack, di mana halaman dapat ditumpuk satu di atas yang lain, memungkinkan pengguna untuk berpindah maju ke halaman baru atau kembali ke halaman sebelumnya.
+
+Saya mendefinisikan rute dalam MaterialApp menggunakan parameter routes, yang merupakan peta dari string (yang berfungsi sebagai identifier rute) ke builder halaman yang bersangkutan. Ini mempermudah pengaturan dan pemeliharaan navigasi, terutama saat aplikasi berkembang dan memiliki lebih banyak halaman. Selain itu, untuk navigasi yang lebih kompleks, saya bisa menggunakan onGenerateRoute, yang memberikan fleksibilitas lebih dalam menghasilkan rute secara dinamis berdasarkan logika yang didefinisikan.
+
+Juga, saya sering menggunakan push dan pop dari Navigator untuk mengatur alur navigasi. Misalnya, ketika pengguna mengisi formulir dan menekan tombol submit, saya menggunakan Navigator.push untuk membawa mereka ke halaman konfirmasi. Sebaliknya, ketika mereka ingin kembali ke halaman sebelumnya, saya menggunakan Navigator.pop. Dengan pendekatan ini, navigasi dalam aplikasi saya menjadi intuitif dan mudah diatur.
+
+
+
+
+<details>
+  <summary>Assignment Sebelumnya</summary>
+
+  <!-- Konten di sini akan disembunyikan di bawah toggle -->
+
+  ## Assignments: Tugas 7
 (will be answered in Bahasa Indonesia)
 
 ### Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya.
@@ -48,4 +131,8 @@ Langkah 3: Setelah itu, saya menambahkan InfoCard ke dalam MyHomePage dengan men
 Langkah 4: Berikutnya, saya membuat widget ItemCard untuk menampilkan ikon dan teks setiap menu item. ItemCard ini menggunakan widget Material untuk memberikan latar belakang dan efek bayangan, serta InkWell untuk menangani aksi ketika pengguna menekan menu. Dengan ini, ItemCard bisa tampil interaktif saat digunakan.
 
 Langkah 5: Terakhir, saya mengintegrasikan ItemCard ke dalam MyHomePage dengan menggunakan GridView.count, yang memungkinkan setiap ItemCard ditampilkan dalam bentuk grid yang responsif. Ini membuat halaman utama memiliki layout yang menampilkan informasi pengguna di bagian atas dan menu navigasi di bagian bawah dalam susunan grid.
+
+
+
+</details>
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:matcha_kitsune/menu.dart';
-import 'package:matcha_kitsune/menu.dart';
+import 'package:matcha_kitsune/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
