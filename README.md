@@ -5,10 +5,84 @@ Matcha Kitsune is an _e-commerce_ platform where everyone can enjoy shopping wit
 "A great product comes from a great quality."
 -- Matcha Kitsune
 
-## Assignments: Tugas 8
+## Assignments: Tugas 9
 (will be answered in Bahasa Indonesia)
 
-### Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+### Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
+ Membuat model saat berinteraksi dengan data JSON dalam aplikasi sangat penting karena model berfungsi sebagai cetak biru yang mengatur dan menstandardisasi struktur data. Ini memastikan bahwa data yang kita tangani sesuai dengan struktur yang kita harapkan dan mengurangi risiko error saat aplikasi mencoba mengakses atau memodifikasi data yang tidak terdefinisi atau tidak konsisten. Tanpa model, kita bisa menghadapi masalah saat melakukan parsing atau serialisasi data JSON, karena tidak adanya kejelasan struktur bisa menyebabkan kesalahan seperti `KeyError` atau masalah tipe data yang tidak cocok. Dengan model, pengembangan menjadi lebih terorganisir dan kode lebih mudah untuk dipelihara serta di-debug.
+
+
+### Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
+Library HTTP yang digunakan dalam tugas ini memfasilitasi komunikasi antara aplikasi Flutter dan backend Django dengan memungkinkan pengiriman dan penerimaan data melalui protokol HTTP. Library ini sangat penting untuk operasi seperti GET untuk mengambil data, POST untuk mengirim data baru ke server, dan PUT atau DELETE untuk mengupdate atau menghapus data yang ada. Penggunaan library ini memungkinkan aplikasi Flutter untuk secara efektif berinteraksi dengan API yang disediakan oleh server, mengelola session pengguna, dan memproses respons yang dikembalikan oleh server, sehingga memudahkan pengembangan fitur yang membutuhkan pertukaran data dinamis dan realtime dengan backend.
+
+
+### Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+`CookieRequest` berfungsi sebagai wrapper untuk request HTTP yang mengelola cookie dalam aplikasi Flutter, memastikan bahwa cookie sesi disertakan dalam setiap komunikasi dengan server untuk menjaga keberlanjutan sesi pengguna. Menggunakan satu instance `CookieRequest` yang dibagikan ke seluruh komponen aplikasi memungkinkan pengelolaan sesi yang konsisten dan efisien, menghindari duplikasi kode dan memastikan bahwa perubahan status sesi seperti login atau logout terintegrasi secara seragam ke seluruh aplikasi.
+
+
+### Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+Proses pengiriman data dari input pengguna hingga ditampilkan di aplikasi Flutter melibatkan beberapa langkah: pengguna memasukkan data melalui UI Flutter, data tersebut dikirim sebagai request HTTP ke server menggunakan library HTTP Flutter. Server menerima dan memproses data tersebut, kemudian mengirimkan respons kembali ke Flutter. Aplikasi Flutter menerima respons ini, memprosesnya, dan memperbarui UI sesuai dengan hasil yang diterima, menampilkan data baru atau pesan yang relevan kepada pengguna.
+
+
+### Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+Register (Pendaftaran Akun):
+
+- Pada Flutter: Pengguna mengisi formulir pendaftaran yang mencakup username, password, dan data lain yang relevan. Flutter mengirimkan data ini melalui request HTTP POST ke server Django.
+- Pada Django: Server menerima data tersebut, memvalidasi input, dan menciptakan akun baru dalam database jika data valid dan belum ada dalam sistem. Django kemudian mengirimkan respons kembali ke Flutter, biasanya berupa konfirmasi berhasil atau error jika ada masalah.
+
+Login (Autentikasi):
+
+- Pada Flutter: Pengguna memasukkan username dan password melalui interface login. Flutter mengirimkan kredensial ini ke Django menggunakan request HTTP POST.
+- Pada Django: Server menerima kredensial, memverifikasi terhadap data yang tersimpan di database, dan jika kredensial cocok, server menghasilkan dan mengirimkan token autentikasi (seperti JWT atau session ID) kembali ke Flutter. Django juga dapat mengatur cookie sesi pada tahap ini untuk manajemen sesi yang berkelanjutan.
+- Pada Flutter: Setelah menerima token atau konfirmasi login, Flutter menyimpan token tersebut untuk digunakan dalam request berikutnya sebagai bukti autentikasi, dan pengguna diarahkan ke menu atau dashboard utama aplikasi.
+
+Logout (Keluar):
+
+- Pada Flutter: Pengguna memilih untuk logout, dan Flutter mengirimkan request ke Django untuk mengakhiri sesi.
+- Pada Django: Server menerima request logout, menghapus atau menandai token atau sesi yang terkait sebagai tidak valid, dan mengirimkan respons ke Flutter yang menandakan bahwa sesi telah berakhir.
+- Pada Flutter: Flutter menerima konfirmasi logout, menghapus token yang disimpan atau data sesi lainnya, dan mengembalikan pengguna ke layar login atau halaman awal.
+
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+1. Setup Autentikasi pada Django
+- Model: Pastikan Django User model siap digunakan.
+- Endpoints: Buat views untuk login, register, dan logout.
+- Tokens: Gunakan Django REST framework untuk handle token-based authentication.
+
+2. Integrasi Sistem Autentikasi pada Flutter
+- Dependensi: Tambahkan http dan provider pada pubspec.yaml.
+- Form: Buat form untuk login dan registrasi dengan TextFormField.
+- Auth Service: Implementasikan service di Flutter yang membuat HTTP requests ke Django untuk autentikasi.
+
+3. Pembuatan Model Kustom
+- Model: Buat model di Flutter yang sesuai dengan data yang diterima dari Django (misalnya User model).
+
+4. Fetch Data dari Django untuk Ditampilkan ke Flutter
+- Fetch Function: Tulis fungsi yang membuat HTTP GET request ke Django untuk mengambil data yang dibutuhkan.
+- Provider: Gunakan Provider untuk state management dan penyimpanan data yang di-fetch.
+
+
+5. Integrasi Form Flutter dengan Layanan Django
+- Submit: Pastikan form di Flutter dapat submit data ke Django melalui HTTP POST request.
+- Validation: Handle validasi input pada Flutter dan tampilkan error yang dikirim dari Django.
+
+
+6. Implementasi Fitur Logout
+- Logout Endpoint: Kirim request ke endpoint logout Django.
+- Clear Data: Bersihkan data yang terkait dengan user di Flutter, misalnya tokens atau user info.
+
+
+
+
+
+
+<details>
+  <summary>Assignment Sebelumnya</summary>
+  
+
+  <!-- Konten di sini akan disembunyikan di bawah toggle -->
+   ## Assignments: Tugas 8
+  ### Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
 Dalam pemrograman Flutter, penggunaan kata kunci const memiliki peran penting dalam meningkatkan efisiensi dan kinerja aplikasi. Kata kunci const digunakan untuk mendeklarasikan nilai yang tidak berubah-ubah sepanjang waktu eksekusi program. Ini berarti bahwa variabel atau objek yang dideklarasikan dengan const diinisialisasi saat waktu kompilasi dan nilainya harus sudah diketahui sebelum aplikasi dijalankan.
 
 Penggunaan const membawa beberapa keuntungan, seperti:
@@ -81,12 +155,6 @@ Saya mendefinisikan rute dalam MaterialApp menggunakan parameter routes, yang me
 Juga, saya sering menggunakan push dan pop dari Navigator untuk mengatur alur navigasi. Misalnya, ketika pengguna mengisi formulir dan menekan tombol submit, saya menggunakan Navigator.push untuk membawa mereka ke halaman konfirmasi. Sebaliknya, ketika mereka ingin kembali ke halaman sebelumnya, saya menggunakan Navigator.pop. Dengan pendekatan ini, navigasi dalam aplikasi saya menjadi intuitif dan mudah diatur.
 
 
-
-
-<details>
-  <summary>Assignment Sebelumnya</summary>
-
-  <!-- Konten di sini akan disembunyikan di bawah toggle -->
 
   ## Assignments: Tugas 7
 (will be answered in Bahasa Indonesia)
